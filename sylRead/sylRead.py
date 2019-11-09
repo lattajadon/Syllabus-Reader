@@ -18,15 +18,19 @@ def getPdfList():
 
 	#using this new path, get textfiles of the pdfs
 	for pdf in listdir(newPath):
-		getTextFile(join(newPath, pdf))
+		getTextFile(join(newPath, pdf), myPath)
 
 
-def getTextFile(nameOfPDF):
+def getTextFile(nameOfPDF, path):
 	'''
-		getTextFile("nameOfPDF") will take the PDF and output it as a textfile
+		getTextFile("nameOfPDF", path) will take the PDF and 
+		output it as a textfile. Path will be taken and used to
+		specify the .jar file needed for tika.
+		Note: Needs the tika-app-1.22.jar and tika-app-python files
+		and folders in the same working directory
 	'''
-	# get the Tika Object
-	tika_client = TikaApp(file_jar="/home/cmput274/Documents/Syllabus-Reader/sylRead/tika-app-1.22.jar")
+	# get the Tika Object from current directory
+	tika_client = TikaApp(file_jar = join(path, "tika-app-1.22.jar"))
 
 	# read the pdf
 	with open(nameOfPDF) as fin:
