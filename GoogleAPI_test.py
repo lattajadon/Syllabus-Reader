@@ -9,7 +9,15 @@ from google.auth.transport.requests import Request
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-def main():
+Event = 'class name - assignment title' #Hopefully?
+Date = 'year-month-date'
+
+def date_converter():
+
+def event_converter():
+
+
+def create_event(event_title, due_date):
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
     """
@@ -36,12 +44,12 @@ def main():
 
     # Call the Calendar API
     event = {
-        'summary': 'Insert Variable for Event Title',
+        'summary': event_title
         'start': {
-            'date': 'INSERT DATE HERE YEAR-MONTH-DAY',
+            'date': due_date,
         },
         'end': {
-            'date': 'INSERT DATE HERE YEAR-MONTH-DAY',
+            'date': due_date,
 
         },
         'recurrence': [
@@ -60,4 +68,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    create_event(Event, Date)
