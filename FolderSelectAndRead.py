@@ -18,12 +18,10 @@ for doc in docslist:
         textfile = (user_directory + "/" + doc)
         txtcontents = readtxt.read_file(textfile)
         dates, coursename = readtxt.find_words(txtcontents)
-        print(coursename) # Debugging Only
-        print(dates) # Debugging Only
+        print(coursename[0]) # Debugging Only
         organized_dates = readtxt.organize_dates(dates)
-        print(organized_dates) # Debugging Only
         proper_dates = readtxt.proper_date(organized_dates)
         print(proper_dates) # Debugging Only
-        #add_events(proper_dates,coursename)
+        add_events(proper_dates,coursename[0])
         remove(textfile)
 

@@ -34,7 +34,7 @@ def find_words(contents):
 	contents = re.sub(r"[Nn]ovember", "Nov", contents)
 	contents = re.sub(r"[Dd]ecember", "Dec", contents)
 
-	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|Labs?|[A-Z].{2,5}.[0-9]\b|[0-9]{1-2}.[A-Z].{2-3}?\b|[0-9]{1,2}.[A-Z][a-z]{2,5}.[0-9]{4}|[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}|[0-9]{4}.[0-9]{1,2}.[0-9]{1,2}", contents)
+	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|Labs?|[A-Z].{2,5}.[0-9]\b|[0-9]{1,2}.[A-Z][a-z]{2,5}.[0-9]{4}\b|[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}|[0-9]{4}.[0-9]{1,2}.[0-9]{1,2}", contents)
 
 	course = re.findall(r"[A-Z][A-Za-z\s-]{1,5}\d{3}",contents)
 
@@ -132,12 +132,10 @@ def proper_date(organized_list):
 			# form will keep track of what format the date is in
 			if not j[0].isdigit():
 				form = 1
-			elif j[0].isdigit() and j[2].isdigit():
+			elif j[-4:] == year and j[-6].isdigit():
 				form = 2
-			elif j[0].isdigit() and not j[3].isdigit():
+			elif j[-4:] == year and not j[-6].isdigit(): 
 				form = 3
-			else: 
-				form = 4
 
 			if form == 1:
 				day = ''
@@ -160,54 +158,42 @@ def proper_date(organized_list):
 					new_date_format=year + '-'+month+'-' + day
 					properDate.append(new_date_format)
 
-			elif form == 2: 
-				if j[5].isdigit():
-				# if the month is represented as numbers
-					month = j[5]
-					if j[6].isdigit(): 
-						month = month +j[6]
-					else: 
-						month = '0'+ month
-				if j[-2].isdigit():
-					day = j[-1]+j[-2]
-				else: 
-					day = '0'+j[-1]
-				new_date_format=year + '-'+month+'-' + day
-				properDate.append(new_date_format)
-
-			elif form == 3:
-				for index in range(0,len(months)):
-				#find the number value for the date Ex. Jan or January is 01  
-					if j[5:7] == months[index]:
-						month = str(index + 1)
-						if len(month) < 2:
-							month = '0'+ month
-							month = '0'+ month
-				if j[-2].isdigit():
-					day = j[-1]+j[-2]
-				else: 
-					day = '0'+j[-1]
-				new_date_format=year + '-'+month+'-' + day
-				properDate.append(new_date_format)
-
-			elif form == 4:
+			elif form == 2:
 				if j[1].isdigit():
 					day = j[0]+j[1]
-						if j[4].isdigit():
-							month = j[3]+j[4]
-						else:
-							month = '0'+j[3]
+					if j[4].isdigit():
+						month = j[3]+j[4]
+					else:
+						month = '0'+j[3]
 				else: 
 					day = '0'+j[0]
 					if j[3].isdigit():
-							month = j[2]+j[3]
-						else:
-							month = '0'+j[2]
+						month = j[2]+j[3]
+					else:
+						month = '0'+j[2]
+				new_date_format = year + '-'+month+'-' + day
+				properDate.append(new_date_format)
 
-
-
-			new_date_format=year + '-'+month+'-' + day
-			properDate.append(new_date_format)
+			elif form == 3:
+				if j[1].isdigit():
+					day = j[0]+j[1]
+					for index in range(0,len(months)):
+					#find the number value for the date Ex. Jan or January is 01  
+						if j[3:5] == months[index]:
+							month = str(index + 1)
+							if len(month) < 2:
+								month = '0'+ month
+				else: 
+					day = '0'+j[0]
+					for index in range(0,len(months)):
+					#find the number value for the date Ex. Jan or January is 01  
+						if j[2:4] == months[index]:
+							month = str(index + 1)
+							if len(month) < 2:
+								month = '0'+ month
+				
+				new_date_format=year + '-'+month+'-' + day
+				properDate.append(new_date_format)
 
 
 		properDates.append(properDate)
