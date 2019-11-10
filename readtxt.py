@@ -88,18 +88,16 @@ def proper_date(organized_list):
 				for char in j: 
 					if char.isdigit():
 						day += char
-				new_date_format=year + '-'+month+'-' + day
-				properDate.append(new_date_format)
+				if month != error: 
+					new_date_format=year + '-'+month+'-' + day
+					properDate.append(new_date_format)
+
 		properDates.append(properDate)
 
 		properDates_updated = []
 		
 		for lists in properDates:
-			add = True
-			for i in lists:
-				if 'error' in i:
-					add = False
-			if (len(lists) > 1) and add == True:
+			if (len(lists) > 1):
 				properDates_updated.append(lists)
 
 
