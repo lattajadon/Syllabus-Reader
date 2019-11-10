@@ -11,6 +11,9 @@ def read_file(filename):
 	contents = file_o.read()
 	file_o.close()
 
+	#find the course name
+
+
 	return contents
 
 def find_words(contents):
@@ -34,7 +37,14 @@ def find_words(contents):
 
 	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|Labs?|[A-Z].{2,5}.[0-9]\b", contents)
 
-	return dates
+	course = re.findall(r"[A-Z]{2,5}.\d{3}\b",contents)
+
+	if len(course) > 1:
+		for i in range(len(course)-1):
+			course.pop()
+
+
+	return (dates,course)
 
 def organize_dates(dates):
 	'''
@@ -71,7 +81,32 @@ def organize_dates(dates):
 
 	return complete_list
 
+def check_duplicates(listoflists):
+	'''
+	param: listoflists: a list with lists in it
+	return: no_duplicates: a list of lists with no duplicates in it
+	'''
+	no_duplicates = []
+	duplicates = []
+
+	for i in listoflists: 
+		strings = ' '.join(i)
+		if strings not in duplicates:
+			duplicates.append(strings)
+
+	for i in duplicates:
+		add = list(i.split())
+
+		no_duplicates.append(add)
+
+	return no_duplicates
+
+
 def proper_date(organized_list):
+	'''
+	param: organized_list: a list of organized lists 
+	return: properDates_updated: convert the dates to the proper format for the google calender API
+	'''
 	today = date.today()
 	year = today.strftime("%Y")
 
@@ -115,11 +150,13 @@ def proper_date(organized_list):
 
 		properDates.append(properDate)
 
-		properDates_updated = []
+		Dates_updated = []
 		
 		for lists in properDates:
 			if (len(lists) > 1):
-				properDates_updated.append(lists)
+				Dates_updated.append(lists)
+
+		properDates_updated = check_duplicates(Dates_updated)
 
 
 	return properDates_updated
@@ -127,8 +164,10 @@ def proper_date(organized_list):
 
 if __name__ == '__main__':
 	testing = read_file('test.txt')
-	words = find_words(testing)
+	words, course = find_words(testing)
 	print('Unorgonized list: ',words)
+
+	print('course: ', course)
 	oro = organize_dates(words)
 	print('Organized! : ',oro)
 	proper = proper_date(oro)
