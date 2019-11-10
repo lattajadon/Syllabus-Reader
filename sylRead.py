@@ -28,7 +28,9 @@ def getPdfList(myPath, jarPath):
 	# using this new path, get textfiles of the pdfs
 	for pdf in listdir(newPath):
 		# MANUALLY CHANGE <newPath> TO GIVE CORRECT PATH TO .JAR FILE!!
-		getTextFile(join(newPath, pdf), jarPath)
+		txtfile = getTextFile(join(newPath, pdf), jarPath)
+
+	return txtfile
 
 
 # GETTEXTFILE'S PATH IS CURRENTLY ONLY GOING TO WORK IF THE .JAR FILE IS
@@ -58,6 +60,8 @@ def getTextFile(nameOfPDF, jarPath):
 		# write the pdf to a text file & add .txt to it
 		with open(foutName + ".txt", "w") as fout:
 			fout.write(content)
+			return foutName+".txt"
+
 
 
 if __name__ == "__main__":
