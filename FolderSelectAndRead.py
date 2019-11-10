@@ -17,6 +17,6 @@ print(organized_dates)
 proper_dates = readtxt.proper_date(organized_dates)
 print(proper_dates)
 
-add_events(proper_dates)
+#add_events(proper_dates)
 
 
