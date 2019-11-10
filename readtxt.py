@@ -13,6 +13,10 @@ def read_file(filename):
 
 	return contents
 
+def course_name(filename):
+	name = re.findall(r".{1-7}?[0-9]{3}", filename)
+	return name
+
 def find_words(contents):
 	'''
 	param: contents: the contents of the file  
