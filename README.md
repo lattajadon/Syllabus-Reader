@@ -22,11 +22,11 @@ Python Scripts:
 	
 * sylRead.py: Through the modules os and Tikapp, will take the folder path chosen from FolderChooser.py, parse through the PDFs into .txt files.
 	
-* ReadText.py: The actual parser of the .txt files! Will read through a .txt file, and using the regex module will search for class name, key words (midterm, exam, assignments, etc), their corresponding dates of the key words, and returning the organized date-format with the key words. 
+* readtxt.py: The actual parser of the .txt files! Will read through a .txt file, and using the regex module will search for class name, key words (midterm, exam, assignments, etc), their corresponding dates of the key words, and returning the organized date-format with the key words. 
 
-* GoogleAPI_Test.py: Creates and adds events to Google Calender with the correct dates, the course name with what the event is. It also adds a email reminder set to 2 days prior to the event date. 
+* GoogleCalendarAPI.py: Creates and adds events to Google Calender with the correct dates, the course name with what the event is. It also adds a email reminder set to 2 days prior to the event date. 
 
-* FolderSelectAndRead.py: The main script running all the python files and functions to read through .txt files created from the PDF-formatted syllabi, parse it for its information, subsequently delete the .txt file after parsing, and add it to the google calender. 
+* SyllabiRead.py: The main script running all the python files and functions to read through .txt files created from the PDF-formatted syllabi, parse it for its information, subsequently delete the .txt file after parsing, and add it to the google calender. 
 
 Additional Files:
 * credentials.json: A credentials file in order to allow for the usage of Google Calender's API.
