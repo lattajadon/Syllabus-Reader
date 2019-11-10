@@ -36,9 +36,8 @@ def find_words(contents):
 
 	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|Labs?|[A-Z].{2,5}.[0-9]\b|[0-9]{1-2}.[A-Z].{2-3}?\b|[0-9]{1,2}.[A-Z][a-z]{2,5}.[0-9]{4}|[0-9]{1,2}.[0-9]{1,2}.[0-9]{4}|[0-9]{4}.[0-9]{1,2}.[0-9]{1,2}", contents)
 
+	course = re.findall(r"[A-Z][A-Za-z\s-]{1,5}\d{3}",contents)
 
-	#locates the course name 
-	course = re.findall(r"[A-Z]{2,5}.\d{3}\b",contents)
 
 	if len(course) > 1:
 		for i in range(len(course)-1):
