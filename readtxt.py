@@ -18,7 +18,7 @@ def find_words(contents):
 	param: contents: the contents of the file  
 	return: dates: a list of specific words and dates
 	'''
-	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|\b[A-Z].{2,5}.[0-9]\b", contents)
+	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|[A-Z].{2,5}.[0-9]\b", contents)
 	#dates = re.findall(r"\b[A-Z].*\s.*\d\b",contents)
 
 	return dates
@@ -88,7 +88,7 @@ def proper_date(organized_list):
 				for char in j: 
 					if char.isdigit():
 						day += char
-				if month != error: 
+				if month != 'error':
 					new_date_format=year + '-'+month+'-' + day
 					properDate.append(new_date_format)
 
