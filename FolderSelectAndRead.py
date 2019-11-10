@@ -2,6 +2,7 @@ from os import getcwd
 import sylRead
 import FolderChooser
 import readtxt
+from GoogleAPI_test import add_events
 
 main_directory = getcwd()
 FolderChooser.button_root()
@@ -15,5 +16,7 @@ organized_dates = readtxt.organize_dates(dates)
 print(organized_dates)
 proper_dates = readtxt.proper_date(organized_dates)
 print(proper_dates)
+
+add_events(proper_dates)
 
 
