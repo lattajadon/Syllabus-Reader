@@ -28,7 +28,7 @@ def organize_dates(dates):
 	'''
 	word_list = ['Midterm','Final','Exam','Assignment','Quiz']
 
-	orgonized_list = []
+	organized_list = []
 
 	for i in range(0,len(dates)):
 		date = []
@@ -39,19 +39,20 @@ def organize_dates(dates):
 					break
 				else:
 					date.append(dates[j])
-			orgonized_list.append(date)
+			organized_list.append(date)
 
-	return orgonized_list
+	return organized_list
 
-def proper_date(orgonized_list):
+def proper_date(organized_list):
 	today = date.today()
 	year = today.strftime("%Y")
 
 	months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+	month = ''  # For future use
 
 	properDates = []
 
-	for set_ in orgonized_list:
+	for set_ in organized_list:
 	# goes through each word and dates list in the orginized list
 		word = set_.pop(0)
 		properDate = [word]
