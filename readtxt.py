@@ -18,6 +18,7 @@ def find_words(contents):
 	param: contents: the contents of the file  
 	return: dates: a list of specific words and dates
 	'''
+
 	contents = re.sub(r"[Jj]anuary", "Jan", contents)
 	contents = re.sub(r"[Ff]ebruary", "Feb", contents)
 	contents = re.sub(r"[Mm]arch", "Mar", contents)
@@ -32,7 +33,6 @@ def find_words(contents):
 	contents = re.sub(r"[Dd]ecember", "Dec", contents)
 
 	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|Labs?|[A-Z].{2,5}.[0-9]\b", contents)
-	#dates = re.findall(r"\b[A-Z].*\s.*\d\b",contents)
 
 	return dates
 
