@@ -28,7 +28,7 @@ def organize_dates(dates):
 	'''
 	word_list = ['Midterm','Final','Exam','Assignment','Quiz']
 
-	organized_list = []
+	organized= []
 
 	for i in range(0,len(dates)):
 		date = []
@@ -40,11 +40,13 @@ def organize_dates(dates):
 				else:
 					date.append(dates[j])
 
-			organized_list.append(date)
+			organized.append(date)
 
-	for lists in range(0, len(organized_list)):
-		if len(organized_list[lists]) == 1:
-			organized_list.pop(lists)
+	organized_list = []
+
+	for lists in organized:
+		if len(lists) > 1:
+			organized_list.append(lists)
 
 	return organized_list
 
