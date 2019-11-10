@@ -11,17 +11,16 @@ def read_file(filename):
 	contents = file_o.read()
 	file_o.close()
 
-	#find the course name
-
-
 	return contents
 
 def find_words(contents):
 	'''
-	param: contents: the contents of the file  
+	param: contents: the contents of the file in a list 
 	return: dates: a list of specific words and dates
+			course: the course name as a string in a list
 	'''
 
+	#locates required content
 	contents = re.sub(r"[Jj]anuary", "Jan", contents)
 	contents = re.sub(r"[Ff]ebruary", "Feb", contents)
 	contents = re.sub(r"[Mm]arch", "Mar", contents)
@@ -39,6 +38,7 @@ def find_words(contents):
 
 	course = re.findall(r"[A-Z][A-Za-z\s-]{1,5}\d{3}",contents)
 
+
 	if len(course) > 1:
 		for i in range(len(course)-1):
 			course.pop()
@@ -48,6 +48,8 @@ def find_words(contents):
 
 def organize_dates(dates):
 	'''
+	param: dates: the contents of a file as a list
+	return: complete_list: orgonized list in lists, assigns the main words with the dates 
 	'''
 	word_list = ['Midterm','Final','Exam','Assignment','Quiz','Lab','Labs']
 
@@ -56,24 +58,28 @@ def organize_dates(dates):
 	for i in range(0,len(dates)):
 		date = []
 		if dates[i] in word_list:
+			#add the main word toa seperate list
 			date.append(dates[i])
 			for j in range(i+1,len(dates)):
+			#continue to add dates to the list until you reach another main word
 				if dates[j] in word_list:
 					break
 				else:
 					date.append(dates[j])
-
+			# add eacj list of word anf dates to a list with the others
 			organized.append(date)
 
 	organized_list = []
 
 	for lists in range(0,len(organized)):
+	# make sure each main word has a date otherwise ignore it
 		if len(organized[lists]) > 1:
 			organized_list.append(organized[lists])
 
 	complete_list = []
 
 	for lists in organized_list:
+	# ingnors any lab dates for now
 		if (lists[0] == 'Lab') or (lists[0] == 'Labs'):
 			complete_list = complete_list
 		else:
@@ -133,6 +139,7 @@ def proper_date(organized_list):
 				day = ''
 				#this is for form 2
 				if j[0:3] not in months:
+					# for any words that got read in that are NOT main words
 					month = 'error'
 
 				for index in range(0,len(months)):
@@ -142,6 +149,7 @@ def proper_date(organized_list):
 						if len(month) < 2:
 							month = '0'+ month
 				for char in j: 
+				#finds the day
 					if char.isdigit():
 						day += char
 				if month != 'error':
@@ -153,6 +161,7 @@ def proper_date(organized_list):
 		Dates_updated = []
 		
 		for lists in properDates:
+		# make sure there are more then 1 items is each list otherwise ignore it
 			if (len(lists) > 1):
 				Dates_updated.append(lists)
 
