@@ -30,7 +30,7 @@ def getPdfList(myPath, jarPath):
 		# MANUALLY CHANGE <newPath> TO GIVE CORRECT PATH TO .JAR FILE!!
 		txtfile = getTextFile(join(newPath, pdf), jarPath)
 
-	return txtfile
+	#return txtfile
 
 
 # GETTEXTFILE'S PATH IS CURRENTLY ONLY GOING TO WORK IF THE .JAR FILE IS
@@ -58,7 +58,7 @@ def getTextFile(nameOfPDF, jarPath):
 
 		content = tika_client.extract_all_content(objectInput = fin)
 		# write the pdf to a text file & add .txt to it
-		with open(foutName + ".txt", "w") as fout:
+		with open(foutName + ".txt", "w", encoding='utf-8', errors='replace') as fout:
 			fout.write(content)
 			return foutName+".txt"
 
