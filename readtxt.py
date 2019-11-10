@@ -39,7 +39,12 @@ def organize_dates(dates):
 					break
 				else:
 					date.append(dates[j])
+
 			organized_list.append(date)
+
+	for lists in range(0, len(organized_list)):
+		if len(organized_list[lists]) == 1:
+			organized_list.pop(lists)
 
 	return organized_list
 
@@ -80,7 +85,7 @@ def proper_date(organized_list):
 						day += char
 				new_date_format=year + '-'+month+'-' + day
 				properDate.append(new_date_format)
-		properDates.append(properDate) 
+		properDates.append(properDate)
 
 
 	return properDates
