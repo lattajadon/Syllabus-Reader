@@ -89,8 +89,14 @@ def proper_date(organized_list):
 				properDate.append(new_date_format)
 		properDates.append(properDate)
 
+		properDates_updated = []
+		
+		for lists in properDates:
+		if len(lists) > 1:
+			properDates_updated.append(lists)
 
-	return properDates
+
+	return properDates_updated
 
 
 if __name__ == '__main__':
