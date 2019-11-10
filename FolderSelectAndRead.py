@@ -13,15 +13,17 @@ sylRead.getPdfList(user_directory, main_directory)
 
 docslist = listdir(user_directory)
 for doc in docslist:
+    # Read through every document in the directory as long as it is a .txt file
     if splitext(doc)[1] == ".txt":
         textfile = (user_directory + "/" + doc)
         txtcontents = readtxt.read_file(textfile)
-        dates = readtxt.find_words(txtcontents)
+        dates, coursename = readtxt.find_words(txtcontents)
+        print(coursename) # Debugging Only
         print(dates) # Debugging Only
         organized_dates = readtxt.organize_dates(dates)
         print(organized_dates) # Debugging Only
         proper_dates = readtxt.proper_date(organized_dates)
         print(proper_dates) # Debugging Only
-        #add_events(proper_dates)
+        #add_events(proper_dates,coursename)
         remove(textfile)
 
