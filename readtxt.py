@@ -18,7 +18,20 @@ def find_words(contents):
 	param: contents: the contents of the file  
 	return: dates: a list of specific words and dates
 	'''
-	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|[A-Z].{2,5}.[0-9]\b", contents)
+	contents = re.sub(r"[Jj]anuary", "Jan", contents)
+	contents = re.sub(r"[Ff]ebruary", "Feb", contents)
+	contents = re.sub(r"[Mm]arch", "Mar", contents)
+	contents = re.sub(r"[Aa]pril", "Apr", contents)
+	contents = re.sub(r"[Mm]ay", "May", contents)
+	contents = re.sub(r"[Jj]une", "Jun", contents)
+	contents = re.sub(r"[Jj]uly", "Jul", contents)
+	contents = re.sub(r"[Aa]ugust", "Aug", contents)
+	contents = re.sub(r"[Ss]eptember", "Sep", contents)
+	contents = re.sub(r"[Oo]ctober", "Oct", contents)
+	contents = re.sub(r"[Nn]ovember", "Nov", contents)
+	contents = re.sub(r"[Dd]ecember", "Dec", contents)
+
+	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|Labs?|[A-Z].{2,5}.[0-9]\b", contents)
 	#dates = re.findall(r"\b[A-Z].*\s.*\d\b",contents)
 
 	return dates
@@ -26,7 +39,7 @@ def find_words(contents):
 def organize_dates(dates):
 	'''
 	'''
-	word_list = ['Midterm','Final','Exam','Assignment','Quiz']
+	word_list = ['Midterm','Final','Exam','Assignment','Quiz','Lab','Labs']
 
 	organized= []
 
@@ -44,11 +57,19 @@ def organize_dates(dates):
 
 	organized_list = []
 
-	for lists in organized:
-		if len(lists) > 1:
-			organized_list.append(lists)
+	for lists in range(0,len(organized)):
+		if len(organized[lists]) > 1:
+			organized_list.append(organized[lists])
 
-	return organized_list
+	complete_list = []
+
+	for lists in organized_list:
+		if (lists[0] == 'Lab') or (lists[0] == 'Labs'):
+			complete_list = complete_list
+		else:
+			complete_list.append(lists)
+
+	return complete_list
 
 def proper_date(organized_list):
 	today = date.today()
