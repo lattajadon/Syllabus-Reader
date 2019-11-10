@@ -27,7 +27,8 @@ def getPdfList(myPath = None):
 		newPath = myPath
 	# using this new path, get textfiles of the pdfs
 	for pdf in listdir(newPath):
-		getTextFile(join(newPath, pdf), "/home/cmput274/Documents/Syllabus-Reader/sylRead")
+		# MANUALLY CHANGE <newPath> TO GIVE CORRECT PATH TO .JAR FILE!!
+		getTextFile(join(newPath, pdf), newPath)
 
 
 # GETTEXTFILE'S PATH IS CURRENTLY ONLY GOING TO WORK IF THE .JAR FILE IS
