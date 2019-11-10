@@ -18,7 +18,7 @@ def find_words(contents):
 	param: contents: the contents of the file  
 	return: dates: a list of specific words and dates
 	'''
-	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|\b[A-Z].{2,4}.[0-9]\b", contents)
+	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|\b[A-Z].{2,5}.[0-9]\b", contents)
 	#dates = re.findall(r"\b[A-Z].*\s.*\d\b",contents)
 
 	return dates
@@ -68,7 +68,7 @@ def proper_date(organized_list):
 		#goes through each date in the dates list
 
 			# form will keep track of what format the date is in
-			if j[1].isdigit():
+			if j[0].isdigit():
 				form = 1
 			else: 
 				form = 2
@@ -76,6 +76,9 @@ def proper_date(organized_list):
 			if form == 2:
 				day = ''
 				#this is for form 2
+				if j[0:3] not in months:
+					month = 'error'
+
 				for index in range(0,len(months)):
 				#find the number value for the date Ex. Jan or January is 01  
 					if j[0:3] == months[index]:
@@ -92,8 +95,12 @@ def proper_date(organized_list):
 		properDates_updated = []
 		
 		for lists in properDates:
-		if len(lists) > 1:
-			properDates_updated.append(lists)
+			add = True
+			for i in lists:
+				if 'error' in i:
+					add = False
+			if (len(lists) > 1) and add == True:
+				properDates_updated.append(lists)
 
 
 	return properDates_updated
