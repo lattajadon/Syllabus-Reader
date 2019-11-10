@@ -193,21 +193,21 @@ def proper_date(organized_list):
 			elif form == 4:
 				if j[1].isdigit():
 					day = j[0]+j[1]
-						if j[4].isdigit():
-							month = j[3]+j[4]
-						else:
-							month = '0'+j[3]
+					if j[4].isdigit():
+						month = j[3]+j[4]
+					else:
+						month = '0'+j[3]
 				else: 
 					day = '0'+j[0]
 					if j[3].isdigit():
-							month = j[2]+j[3]
-						else:
-							month = '0'+j[2]
+						month = j[2]+j[3]
+					else:
+						month = '0'+j[2]
 
 
 
-			new_date_format=year + '-'+month+'-' + day
-			properDate.append(new_date_format)
+				new_date_format=year + '-'+month+'-' + day
+				properDate.append(new_date_format)
 
 
 		properDates.append(properDate)
