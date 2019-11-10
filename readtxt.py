@@ -7,15 +7,11 @@ def read_file(filename):
 	return: contents: the contents of the file
 	'''
 
-	file_o = open(filename,'r')
+	file_o = open(filename, 'r', encoding='utf-8')
 	contents = file_o.read()
 	file_o.close()
 
 	return contents
-
-def course_name(filename):
-	name = re.findall(r".{1-7}?[0-9]{3}", filename)
-	return name
 
 def find_words(contents):
 	'''
@@ -36,7 +32,7 @@ def find_words(contents):
 	contents = re.sub(r"[Nn]ovember", "Nov", contents)
 	contents = re.sub(r"[Dd]ecember", "Dec", contents)
 
-	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|Labs?|[A-Z].{2,5}.[0-9]\b", contents)
+	dates = re.findall(r"Midterm|Final|Exam|Assignment|Quiz|Labs?|[A-Z].{2,5}.[0-9]\b|[0-9]{1-2}.[A-Z].{2-3}?\b", contents)
 
 	return dates
 
