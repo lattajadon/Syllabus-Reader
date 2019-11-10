@@ -3,7 +3,7 @@ from os.path import splitext
 import sylRead
 import FolderChooser
 import readtxt
-from GoogleAPI_test import add_events
+from GoogleCalendarAPI import add_events
 
 main_directory = getcwd()
 FolderChooser.button_root()
@@ -22,6 +22,6 @@ for doc in docslist:
         organized_dates = readtxt.organize_dates(dates)
         proper_dates = readtxt.proper_date(organized_dates)
         print(proper_dates) # Debugging Only
-        add_events(proper_dates,coursename[0])
+        # add_events(proper_dates,coursename[0])
         remove(textfile)
 
