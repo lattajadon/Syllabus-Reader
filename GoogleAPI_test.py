@@ -9,12 +9,17 @@ from google.auth.transport.requests import Request
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-Event = 'class name - assignment title' #Hopefully?
-Date = 'year-month-date'
-
-def date_converter():
-
-def event_converter():
+def add_events(event_data):
+    for event in event_data:
+        if len(event) == 2:
+            event_title = event[0]
+            due_date = event[1]
+            create_event(event_title, due_date)
+        elif len(event) > 2:
+            for i in range(len(event)-1):
+                event_title = event[0] + str(i+1)
+                due_date = event[i+1]
+                create_event(event_title, due_date)
 
 
 def create_event(event_title, due_date):
@@ -44,7 +49,7 @@ def create_event(event_title, due_date):
 
     # Call the Calendar API
     event = {
-        'summary': event_title
+        'summary': event_title,
         'start': {
             'date': due_date,
         },
@@ -57,8 +62,7 @@ def create_event(event_title, due_date):
         'reminders': {
             'useDefault': False,
             'overrides': [
-                {'method': 'email', 'minutes': 24 * 60},
-                {'method': 'popup', 'minutes': 60},
+                {'method': 'email', 'minutes': 48 * 60},
             ],
         },
     }
