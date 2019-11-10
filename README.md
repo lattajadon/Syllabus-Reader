@@ -5,13 +5,15 @@ CREATORS: Dennea Maccallum, Jadon Latta, Steven Jiao
 This program will use Python 3 to read a directory of syllabi PDFs and combine all the due dates onto Google Calander.
 
 TO RUN:
-1. Create a clone of our repository by runnning the following code in the command line: git clone https://github.com/lattajadon/Syllabus-Reader.git
+1. Create a clone of our repository by runnning the following code in the command line: 
+	git clone https://github.com/lattajadon/Syllabus-Reader.git
 
 2. Download the Tika wrapper: https://pypi.org/project/tika-app/. After the pip install, make sure the tika-app-python folder is in the same directory as the rest of the files.
 
 3. Download the Apache Tika 1.22 file from: https://tika.apache.org/download.html by selecting the tika-app-1.22.jar mirror for download. Make sure this .jar file is in your working directory.
 
-4. Making sure the credentials.json file is in the working directory, run the following code in the terminal: pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+4. Making sure the credentials.json file is in the working directory, run the following code in the terminal: 
+	pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
 5. Now, in the working directory, run the following on the terminal: python3 FolderSelectAndRead.py
 
